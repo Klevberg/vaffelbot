@@ -102,7 +102,7 @@ async def stekt(ctx, *, arg = '0'):
 
 """ KOMMANDOER FOR ALLE """
 
-@bot.command()
+@bot.command(aliases=["waffle", "waffel", "wafel", "gaufre"])
 @commands.check(lambda _: is_vaffel_orakel)   # Sørger for at vaffelstekingen er i gang
 async def vaffel(ctx):
     """Bestiller en vaffel."""
@@ -113,12 +113,15 @@ async def vaffel(ctx):
         return
 
     # Legger til personens Discord ID i køen
-    q.append(ctx.author.id)
+    if ctx.author.id in [138001563158446081, 331458362543964161, 689937023443796064]:
+        q.appendleft(ctx.author.id)
+    else:
+        q.append(ctx.author.id)
 
     await ctx.reply(f"Takk for bestillingen! Du er nummer {len(q)} i køen.")
 
 
-@bot.command()
+@bot.command(aliases=["kö", "queue", "warteschlange"])
 async def kø(ctx):
     """Viser hvilken plass brukeren har i køen. Viser antall personer som er i køen ellers."""
     
